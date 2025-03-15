@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Pegawai</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 2px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #68a06b;
+        }
+    </style>
+</head>
+<body>
+    <h2>Data Pegawai</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nama Pegawai</th>
+                <th>Umur</th>
+                <th>Jabatan</th>
+                <th>Status</th>
+                <th>Gaji Pokok</th>
+                <th>Tunjangan Jabatan</th>
+                <th>BPJS</th>
+                <th>Tunjangan Keluarga</th>
+                <th>Total Gaji</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Dodi Prayodi</td>
+                <td>25 tahun</td>
+                <td>Manajer</td>
+                <td>Menikah</td>
+                <td id="gaji-pokok"></td>
+                <td id="tunjangan-jabatan"></td>
+                <td id="bpjs"></td>
+                <td id="tunjangan-keluarga"></td>
+                <td id="total-gaji"></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="8" style="text-align: right;">Total Gaji:</th>
+                <td id="total-gaji-footer"></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <script>
+        // Data Pegawai
+        const namaPegawai = "Dodi Prayodi";
+        const umur = 25;
+        const jabatan = "Manajer";
+        const status = "Menikah";
+
+        // Hitung Gaji Pokok 
+        let gajiPokok;
+        if (jabatan === "Manajer") {
+            gajiPokok = 15000000;
+        } else if (jabatan === "Asisten Manajer") {
+            gajiPokok = 10000000;
+        } else if (jabatan === "Staff") {
+            gajiPokok = 5000000;
+        } else {
+            gajiPokok = 0;
+        }
+
+        // Hitung Tunjangan Jabatan
+        const tunjanganJabatan = 0.15 * gajiPokok;
+
+        // Hitung BPJS 
+        const bpjs = 0.10 * gajiPokok;
+
+        // Hitung Tunjangan Keluarga 
+        const tunjanganKeluarga = status === "Menikah" ? 0.20 * gajiPokok : 0;
+
+        // Hitung Total Gaji
+        const totalGaji = gajiPokok + tunjanganJabatan + bpjs + tunjanganKeluarga;
+
+        // Tampilkan data ke dalam tabel
+        document.getElementById("gaji-pokok").textContent = `Rp ${gajiPokok.toLocaleString()}`;
+        document.getElementById("tunjangan-jabatan").textContent = `Rp ${tunjanganJabatan.toLocaleString()}`;
+        document.getElementById("bpjs").textContent = `Rp ${bpjs.toLocaleString()}`;
+        document.getElementById("tunjangan-keluarga").textContent = `Rp ${tunjanganKeluarga.toLocaleString()}`;
+        document.getElementById("total-gaji").textContent = `Rp ${totalGaji.toLocaleString()}`;
+        document.getElementById("total-gaji-footer").textContent = `Rp ${totalGaji.toLocaleString()}`;
+    </script>
+</body>
+</html>
