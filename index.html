@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistem Manajemen Produk Toko Online</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Manajemen Produk Toko Online</h1>
+    </header>
+
+    <!-- Form Tambah Produk -->
+    <section class="form-section">
+      <h2>Tambah Produk Baru</h2>
+      <form id="formTambahProduk" class="form">
+        <div class="form-group">
+          <label for="nama">Nama Produk:</label>
+          <input type="text" id="nama" placeholder="Masukkan nama produk" required>
+        </div>
+        <div class="form-group">
+          <label for="harga">Harga:</label>
+          <input type="number" id="harga" placeholder="Masukkan harga" required>
+        </div>
+        <div class="form-group">
+          <label for="stok">Stok:</label>
+          <input type="number" id="stok" placeholder="Masukkan stok" required>
+        </div>
+        <button type="submit" class="btn-tambah">Tambah Produk</button>
+      </form>
+    </section>
+
+    <!-- Form Hapus Produk -->
+    <section class="form-section">
+      <h2>Hapus Produk</h2>
+      <form id="formHapusProduk" class="form">
+        <div class="form-group">
+          <label for="idHapus">ID Produk:</label>
+          <input type="number" id="idHapus" placeholder="Masukkan ID produk" required>
+        </div>
+        <button type="submit" class="btn-hapus">Hapus Produk</button>
+      </form>
+    </section>
+
+    <!-- Daftar Produk -->
+    <section class="daftar-produk">
+      <h2>Daftar Produk</h2>
+      <table id="tabelProduk">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nama</th>
+            <th>Harga</th>
+            <th>Stok</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
