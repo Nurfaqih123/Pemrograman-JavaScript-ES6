@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Manajemen Transportasi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Styles CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #74ce8a, #2575fc);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 800px;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 15px;
+        }
+
+        .form-container {
+            margin-bottom: 30px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        input, select, button {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            border-color: #a4a8e7;
+            outline: none;
+            box-shadow: 0 0 5px rgba(12, 54, 172, 0.5);
+        }
+
+        button {
+            background-color: #d45c80;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #50688b;
+        }
+
+        #daftar-pelanggan {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #table-pelanggan {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        #table-pelanggan th, #table-pelanggan td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        #table-pelanggan th {
+            background-color: #d45c80;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        #table-pelanggan tbody tr:hover {
+            background-color: #f1f1f1;
+            transition: background-color 0.3s ease;
+        }
+
+        #table-pelanggan tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sistem Manajemen Transportasi</h1>
+        <div class="form-container">
+            <h2>Tambah Pelanggan</h2>
+            <form id="form-pelanggan">
+                <input type="text" id="nama" placeholder="Nama Pelanggan" required>
+                <input type="text" id="nomorTelepon" placeholder="Nomor Telepon" required>
+                <select id="jenisKendaraan" required>
+                    <option value="" disabled selected>Pilih Kendaraan</option>
+                    <option value="Motor">Motor</option>
+                    <option value="Mobil">Mobil</option>
+                </select>
+                <input type="text" id="merkKendaraan" placeholder="Merk Kendaraan" required>
+                <button type="submit">Tambah Pelanggan</button>
+            </form>
+        </div>
+        <div id="daftar-pelanggan">
+            <h2>Daftar Pelanggan yang Menyewa Kendaraan</h2>
+            <table id="table-pelanggan">
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>Nomor Telepon</th>
+                        <th>Jenis Kendaraan</th>
+                        <th>Merk Kendaraan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data pelanggan akan dimasukkan di sini oleh JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // 1. Class Kendaraan (Superclass)
+        class Kendaraan {
+            constructor(merk, jenis) {
+                this.merk = merk;
+                this.jenis = jenis;
+            }
+
+            infoKendaraan() {
+                return `${this.jenis} - ${this.merk}`;
+            }
+        }
+
+        // 2. Subclass Motor dan Mobil
+        class Motor extends Kendaraan {
+            constructor(merk) {
+                super(merk, "Motor");
+            }
+        }
+
+        class Mobil extends Kendaraan {
+            constructor(merk) {
+                super(merk, "Mobil");
+            }
+        }
+
+        // 3. Class Pelanggan
+        class Pelanggan {
+            constructor(nama, nomorTelepon) {
+                this.nama = nama;
+                this.nomorTelepon = nomorTelepon;
+                this.kendaraanDisewa = null; // Awalnya tidak ada kendaraan yang disewa
+            }
+
+            sewaKendaraan(kendaraan) {
+                this.kendaraanDisewa = kendaraan;
+            }
+
+            infoPelanggan() {
+                if (this.kendaraanDisewa) {
+                    return {
+                        nama: this.nama,
+                        nomorTelepon: this.nomorTelepon,
+                        jenisKendaraan: this.kendaraanDisewa.jenis,
+                        merkKendaraan: this.kendaraanDisewa.merk,
+                    };
+                } else {
+                    return {
+                        nama: this.nama,
+                        nomorTelepon: this.nomorTelepon,
+                        jenisKendaraan: "Tidak ada",
+                        merkKendaraan: "Tidak ada",
+                    };
+                }
+            }
+        }
+
+        // 4. Sistem Manajemen Transportasi
+        class SistemManajemenTransportasi {
+            constructor() {
+                this.daftarPelanggan = [];
+            }
+
+            tambahPelanggan(pelanggan) {
+                this.daftarPelanggan.push(pelanggan);
+            }
+
+            tampilkanDaftarPelanggan() {
+                const tableBody = document.querySelector("#table-pelanggan tbody");
+                tableBody.innerHTML = ""; // Bersihkan tabel sebelum menambahkan data baru
+                this.daftarPelanggan.forEach((pelanggan) => {
+                    if (pelanggan.kendaraanDisewa) {
+                        const row = document.createElement("tr");
+                        const info = pelanggan.infoPelanggan();
+                        row.innerHTML = `
+                            <td>${info.nama}</td>
+                            <td>${info.nomorTelepon}</td>
+                            <td>${info.jenisKendaraan}</td>
+                            <td>${info.merkKendaraan}</td>
+                        `;
+                        tableBody.appendChild(row);
+                    }
+                });
+            }
+        }
+
+        // 5. Inisialisasi Sistem
+        const sistem = new SistemManajemenTransportasi();
+
+        // 6. Tambahkan Pelanggan Contoh (NASA dan TEGUH)
+        const nasaPelanggan = new Pelanggan("NASA", "08123456789");
+        const teguhPelanggan = new Pelanggan("TEGUH", "08987654321");
+
+        // NASA menyewa Motor Honda
+        const motorHonda = new Motor("Honda");
+        nasaPelanggan.sewaKendaraan(motorHonda);
+
+        // TEGUH menyewa Mobil Toyota
+        const mobilToyota = new Mobil("Toyota");
+        teguhPelanggan.sewaKendaraan(mobilToyota);
+
+        // Tambahkan pelanggan ke sistem
+        sistem.tambahPelanggan(nasaPelanggan);
+        sistem.tambahPelanggan(teguhPelanggan);
+
+        // 7. Tampilkan daftar pelanggan saat halaman dimuat
+        sistem.tampilkanDaftarPelanggan();
+
+        // 8. Handle Form Submission
+        document.getElementById("form-pelanggan").addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            // Ambil data dari form
+            const nama = document.getElementById("nama").value;
+            const nomorTelepon = document.getElementById("nomorTelepon").value;
+            const jenisKendaraan = document.getElementById("jenisKendaraan").value;
+            const merkKendaraan = document.getElementById("merkKendaraan").value;
+
+            // Buat kendaraan berdasarkan jenis
+            let kendaraan;
+            if (jenisKendaraan === "Motor") {
+                kendaraan = new Motor(merkKendaraan);
+            } else if (jenisKendaraan === "Mobil") {
+                kendaraan = new Mobil(merkKendaraan);
+            }
+
+            // Buat pelanggan dan sewa kendaraan
+            const pelanggan = new Pelanggan(nama, nomorTelepon);
+            pelanggan.sewaKendaraan(kendaraan);
+
+            // Tambahkan pelanggan ke sistem
+            sistem.tambahPelanggan(pelanggan);
+
+            // Tampilkan daftar pelanggan
+            sistem.tampilkanDaftarPelanggan();
+
+            // Reset form
+            document.getElementById("form-pelanggan").reset();
+        });
+    </script>
+</body>
+</html>
