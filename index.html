@@ -157,7 +157,7 @@
     </div>
 
     <script>
-        // 1. Class Kendaraan (Superclass)
+        // Class Kendaraan
         class Kendaraan {
             constructor(merk, jenis) {
                 this.merk = merk;
@@ -169,7 +169,7 @@
             }
         }
 
-        // 2. Subclass Motor dan Mobil
+        // Subclass Motor dan Mobil
         class Motor extends Kendaraan {
             constructor(merk) {
                 super(merk, "Motor");
@@ -182,7 +182,7 @@
             }
         }
 
-        // 3. Class Pelanggan
+        // Class Pelanggan
         class Pelanggan {
             constructor(nama, nomorTelepon) {
                 this.nama = nama;
@@ -213,7 +213,7 @@
             }
         }
 
-        // 4. Sistem Manajemen Transportasi
+        // Sistem Manajemen Transportasi
         class SistemManajemenTransportasi {
             constructor() {
                 this.daftarPelanggan = [];
@@ -225,7 +225,7 @@
 
             tampilkanDaftarPelanggan() {
                 const tableBody = document.querySelector("#table-pelanggan tbody");
-                tableBody.innerHTML = ""; // Bersihkan tabel sebelum menambahkan data baru
+                tableBody.innerHTML = ""; 
                 this.daftarPelanggan.forEach((pelanggan) => {
                     if (pelanggan.kendaraanDisewa) {
                         const row = document.createElement("tr");
@@ -242,18 +242,18 @@
             }
         }
 
-        // 5. Inisialisasi Sistem
+        // Inisialisasi Sistem
         const sistem = new SistemManajemenTransportasi();
 
-        // 6. Tambahkan Pelanggan Contoh (NASA dan TEGUH)
+        // Tambahkan Pelanggan
         const nasaPelanggan = new Pelanggan("NASA", "08123456789");
         const teguhPelanggan = new Pelanggan("TEGUH", "08987654321");
 
-        // NASA menyewa Motor Honda
+       
         const motorHonda = new Motor("Honda");
         nasaPelanggan.sewaKendaraan(motorHonda);
 
-        // TEGUH menyewa Mobil Toyota
+        
         const mobilToyota = new Mobil("Toyota");
         teguhPelanggan.sewaKendaraan(mobilToyota);
 
@@ -261,10 +261,10 @@
         sistem.tambahPelanggan(nasaPelanggan);
         sistem.tambahPelanggan(teguhPelanggan);
 
-        // 7. Tampilkan daftar pelanggan saat halaman dimuat
+        // Tampilkan daftar pelanggan saat halaman dimuat
         sistem.tampilkanDaftarPelanggan();
 
-        // 8. Handle Form Submission
+        // Handle Form Submission
         document.getElementById("form-pelanggan").addEventListener("submit", (e) => {
             e.preventDefault();
 
