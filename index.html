@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manajemen Produk</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Manajemen Produk</h1>
+        <div class="form-container">
+            <h2>Tambah Produk</h2>
+            <form id="tambahProdukForm">
+                <input type="number" id="produkId" placeholder="ID Produk" required>
+                <input type="text" id="produkNama" placeholder="Nama Produk" required>
+                <input type="number" id="produkHarga" placeholder="Harga Produk" required>
+                <button type="submit">Tambah Produk</button>
+            </form>
+        </div>
+        <div class="form-container">
+            <h2>Hapus Produk</h2>
+            <form id="hapusProdukForm">
+                <input type="number" id="hapusProdukId" placeholder="ID Produk" required>
+                <button type="submit">Hapus Produk</button>
+            </form>
+        </div>
+        <div class="produk-list">
+            <h2>Daftar Produk</h2>
+            <ul id="produkList"></ul>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
